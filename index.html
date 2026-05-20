@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圓形計算機 (Circle Calculator)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f7f6;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            border-radius: 4px;
+        }
+        p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>圓形屬性計算器</h2>
+    
+    <div class="input-group">
+        <label for="radiusInput">請輸入圓的半徑 (Radius):</label>
+        <input type="number" id="radiusInput" placeholder="例如: 5" value="5">
+    </div>
+    
+    <button onclick="handleCalculation()">開始計算</button>
+    
+    <div class="result-box">
+        <p id="circumferenceResult">The circumference is --</p>
+        <p id="areaResult">The area is --</p>
+    </div>
+</div>
+
+<script>
+    // 1. 計算圓周長的函式
+    function calcCircumfrence(radius) {
+        // 周長公式: 2 * pi * r
+        const circumference = 2 * Math.PI * radius;
+        
+        // 抓取 HTML 顯示位置，並輸出題目要求的格式 (四捨五入到小數後兩位)
+        const resultText = "The circumference is " + circumference.toFixed(2);
+        document.getElementById("circumferenceResult").innerText = resultText;
+        
+        // 同時在瀏覽器的主控台 (Console) 印出
+        console.log(resultText);
+    }
+
+    // 2. 計算圓面積的函式
+    function calcArea(radius) {
+        // 面積公式: pi * r^2
+        const area = Math.PI * Math.pow(radius, 2);
+        
+        // 抓取 HTML 顯示位置，並輸出題目要求的格式
+        const resultText = "The area is " + area.toFixed(2);
+        document.getElementById("areaResult").innerText = resultText;
+        
+        // 同時在瀏覽器的主控台 (Console) 印出
+        console.log(resultText);
+    }
+
+    // 按鈕點擊時會觸發這個主要函式，去呼叫上面兩個題目要求的函式
+    function handleCalculation() {
+        // 取得輸入框的數值並轉成數字
+        const radius = parseFloat(document.getElementById("radiusInput").value);
+        
+        if (isNaN(radius) || radius <= 0) {
+            alert("請輸入有效的正數字！");
+            return;
+        }
+        
+        // 執行題目要求的兩個關鍵函式
+        calcCircumfrence(radius);
+        calcArea(radius);
+    }
+
+    // 網頁載入時先預設執行一次 (用預設值 5 計算)
+    handleCalculation();
+</script>
+
+</body>
+</html>
